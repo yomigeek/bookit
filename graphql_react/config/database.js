@@ -5,12 +5,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
-const conn = mongoose.connect(process.env.DATABASE_URL)
-.then(() => {
-  console.log(`Database connected!`);
-})
-.catch((err => {
-  console.log(err);
-}));
+const conn = mongoose.connect(process.env.DATABASE_URL);
 
 export { conn };

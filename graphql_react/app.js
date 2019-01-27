@@ -2,7 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';   
 import graphqlHttp from 'express-graphql';
 import { buildSchema } from 'graphql';
-import conn from './config/database';
+import { conn } from './config/database';
+import Event from './models/events';
 
 const app = express();
 const port = 5000;
@@ -43,24 +44,42 @@ app.use('/graphapi', graphqlHttp({
   `),
   rootValue: {
     events: () => {
-      return events ;
+      return Event
+      .find()
+      .then(
+        (events) => {
+          events.map(event => {
+            return { ...event._doc }
+          })
+        }
+      )
+      .catch((err) => {
+        throw err;
+      });
     },
-    createEvent: (args) => {
-      const event = {
-        _id: Math.random().toString(),
+    createEvent: args => {
+      
+      const event = new Event({
         title: args.eventInput.title,
         description: args.eventInput.description,
         price: +args.eventInput.price,
-        date: args.eventInput.createdAt ,
-      }
-      events.push(event);
-      return event;
+        date: new Date(args.eventInput.date) ,
+      });
+      
+      return event
+      .save()
+      .then((result) => {
+        console.log(result, 'Created!');
+        return result;
+      })
+      .catch((err => {
+        console.log(err);
+        throw err;
+      }));
     }
   },
   graphiql: true,
 }));
-
-conn;
 
 app.listen(port, () => {
   console.log(`GraphQL server is running on: ${port}`);
