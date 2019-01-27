@@ -20,6 +20,7 @@
   "homepage": "https://github.com/yomigeek/ftapserver#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",

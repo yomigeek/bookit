@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';   
 import graphqlHttp from 'express-graphql';
 import { buildSchema } from 'graphql';
+import conn from './config/database';
 
 const app = express();
 const port = 5000;
@@ -58,6 +59,8 @@ app.use('/graphapi', graphqlHttp({
   },
   graphiql: true,
 }));
+
+conn;
 
 app.listen(port, () => {
   console.log(`GraphQL server is running on: ${port}`);
