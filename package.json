@@ -1,0 +1,39 @@
+{
+  "name": "fastap",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node graphql_react/app.js  reset-env",
+    "dev:graph": "cross-env NODE_ENV=development nodemon graphql_react/app.js --exec babel-node --presets babel-preset-env"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yomigeek/ftapserver.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yomigeek/ftapserver/issues"
+  },
+  "homepage": "https://github.com/yomigeek/ftapserver#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1",
+    "mysql": "^2.16.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.15.0",
+    "nodemon": "^1.18.3"
+  }
+}
