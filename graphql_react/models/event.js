@@ -1,9 +1,5 @@
 import mongoose from 'mongoose';
 
-const dotenv = require('dotenv');
-
-dotenv.config();
-
 const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
@@ -23,6 +19,10 @@ const eventSchema = new Schema({
     type: Date,
     required: true
   },
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 export default mongoose.model('Event', eventSchema);
