@@ -112,7 +112,6 @@ app.use('/graphapi', graphqlHttp({
               }
           })
           // return events;
-
         }
       )
       .catch((err) => {
