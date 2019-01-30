@@ -14,13 +14,17 @@ export const bookings = async () => {
 };
 
 export const bookEvent = async args => {
-  const fetchEvent = await Event.findOne({ _id: args.eventId });
-  const booking = new Booking({
-    user: "5c4e388096418e67c536b183",
-    event: fetchEvent
-  });
-  const result = await booking.save();
-  return transformBooking(result);
+  try {
+    const fetchEvent = await Event.findOne({ _id: args.eventId });
+    const booking = new Booking({
+      user: "5c4e388096418e67c536b183",
+      event: fetchEvent
+    });
+    const result = await booking.save();
+    return transformBooking(result);
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const cancelBooking = async args => {

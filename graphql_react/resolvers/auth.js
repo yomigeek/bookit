@@ -30,29 +30,33 @@ export const createUser = async args => {
   }
 };
 
-export const login = async ({ email, password }) => {
-  const checkUserExist = User.findOne({ email });
-  if (!checkUserExist) {
-    throw new Error("User does not exist!");
-  }
+// export const login = async ({ email, password }) => {
+//   try {
+//       const checkUserExist = await User.findOne({ email: email });
+//       if (!checkUserExist) {
+//         throw new Error("User does not exist!");
+//       }
 
-  const checkUserPassword = await bcrypt.compare(
-    password,
-    checkUserExist.password
-  );
-  if (!checkUserPassword) {
-    throw new Error("Password is incorrect!");
-  }
+//       const checkUserPassword = await bcrypt.compare(
+//         password,
+//         checkUserExist.password
+//       );
+//       if (!checkUserPassword) {
+//         throw new Error("Password is incorrect!");
+//       }
 
-  const token = await createToken({
-    userId: checkUserExist.id,
-    email,
-    expiryTime: "2h"
-  });
+//       const token = await createToken({
+//         userId: checkUserExist.id,
+//         userEmail: email,
+//         expiryTime: "2h"
+//       });
 
-  return {
-    userId: checkUserExist.id,
-    token,
-    tokenExpiration: expiryTime
-  };
-};
+//       return {
+//         userId: checkUserExist.id,
+//         token,
+//         tokenExpiration: expiryTime
+//       };
+// } catch (err) {
+//   throw err;
+// }
+// };
