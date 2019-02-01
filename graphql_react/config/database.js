@@ -1,9 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 
 dotenv.config();
 
 const conn = mongoose.connect(process.env.DATABASE_URL);
+
+console.log(process.env.DATABASE_URL);
 
 export { conn };
