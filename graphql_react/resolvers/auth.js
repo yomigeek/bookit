@@ -44,7 +44,7 @@ export const login = async ({ email, password }) => {
     if (!checkUserPassword) {
       throw new Error("Password is incorrect!");
     }
-    const expiryTime = "2h";
+    const expiryTime = process.env.TOKEN_EXPIRY_TIME;
     const token = await createToken({
       userId: checkUserExist.id,
       userEmail: email,

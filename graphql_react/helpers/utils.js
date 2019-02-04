@@ -15,3 +15,7 @@ export const createToken = tokenData => {
     }
   );
 };
+
+export const verifyToken = token => {
+  return jwt.verify(token, process.env.SECRET);
+};

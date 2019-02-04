@@ -14,13 +14,17 @@ export const events = async () => {
   }
 };
 
-export const createEvent = async args => {
+export const createEvent = async (args, req) => {
+  const { isUserAuth, userId } = req;
+  if (!isUserAuth) {
+    throw new Error("Unauthorized Access!");
+  }
   const event = new Event({
     title: args.eventInput.title,
     description: args.eventInput.description,
     price: +args.eventInput.price,
     date: new Date(args.eventInput.date),
-    creator: "5c4e388096418e67c536b183"
+    creator: userId
   });
   let createdEvent;
   try {
@@ -28,7 +32,7 @@ export const createEvent = async args => {
 
     createdEvent = transformEvent(result);
 
-    const user = await User.findById("5c4e388096418e67c536b183");
+    const user = await User.findById(userId);
     if (!user) {
       throw new Error("User not found!");
     }

@@ -4,11 +4,18 @@ import graphqlHttp from "express-graphql";
 import { conn } from "./config/database";
 import { graphQlSchema } from "./schema";
 import graphQlResolvers from "./resolvers/index";
+import { isAuth } from "./middleware/checkAuth";
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
-const port = 5000;
+
+const port = process.env.PORT || 5050;
 
 app.use(bodyParser.json());
+
+app.use(isAuth);
 
 app.use(
   "/graphapi",
