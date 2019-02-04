@@ -3,6 +3,10 @@ import { transformBooking, transformEvent } from "./helperFunctions";
 import Event from "../models/event";
 
 export const bookings = async () => {
+  const { isUserAuth } = req;
+  if (!isUserAuth) {
+    throw new Error("Unauthorized Access!");
+  }
   try {
     const bookings = await Booking.find();
     return bookings.map(booking => {
@@ -14,10 +18,14 @@ export const bookings = async () => {
 };
 
 export const bookEvent = async args => {
+  const { isUserAuth, userId } = req;
+  if (!isUserAuth) {
+    throw new Error("Unauthorized Access!");
+  }
   try {
     const fetchEvent = await Event.findOne({ _id: args.eventId });
     const booking = new Booking({
-      user: "5c4e388096418e67c536b183",
+      user: userId,
       event: fetchEvent
     });
     const result = await booking.save();
@@ -28,6 +36,10 @@ export const bookEvent = async args => {
 };
 
 export const cancelBooking = async args => {
+  const { isUserAuth } = req;
+  if (!isUserAuth) {
+    throw new Error("Unauthorized Access!");
+  }
   try {
     const getBookedEvent = await Booking.findById(args.bookingId).populate(
       "event"

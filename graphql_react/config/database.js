@@ -6,6 +6,4 @@ dotenv.config();
 
 const conn = mongoose.connect(process.env.DATABASE_URL);
 
-console.log(process.env.DATABASE_URL);
-
 export { conn };
